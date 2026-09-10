@@ -52,3 +52,7 @@ android/app/upload-keystore.jks
 
 # Local helper copies
 /win_ui.ps1
+# Build outputs of the Android module (Gradle reports etc.)
+android/build/
+android/app/build/
+android/.gradle/
