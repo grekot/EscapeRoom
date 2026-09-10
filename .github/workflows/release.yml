@@ -50,6 +50,11 @@ jobs:
           cache: true
       - run: flutter pub get
 
+      - name: Gradle JVM memory (CI runner has no user gradle.properties)
+        run: |
+          mkdir -p ~/.gradle
+          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8" >> ~/.gradle/gradle.properties
+
       - name: Release signing config
         if: env.HAS_KEYSTORE == 'true'
         env:
