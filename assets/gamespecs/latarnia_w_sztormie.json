@@ -1,0 +1,591 @@
+{
+  "format": "escape-room-game/1",
+  "id": "builtin_latarnia",
+  "scenarioId": "builtin_latarnia",
+  "title": "Latarnia w sztormie",
+  "intro": "Wiatr wyje, a fale walą o skały. Schroniliście się w starej latarni morskiej, ale ciężkie drzwi zatrzasnęły się za Wami, a zamek zablokował się od soli i rdzy. Na morzu miga w ciemności statek – bez światła latarni rozbije się o rafę. Musicie przywrócić prąd, nadać wezwanie, rozpalić wielką lampę i odblokować drzwi, zanim sztorm wygra.",
+  "outro": "Zamek szczęka i drzwi ustępują. Sztorm słabnie, a wielka lampa nad Wami rzuca na morze snop światła. Statek odbija od rafy i wraca na kurs, a jego syrena dziękuje Wam trzema długimi sygnałami. Latarnia znów żyje – dzięki Wam.",
+  "difficulty": "medium",
+  "targetAge": 10,
+  "visualTheme": "ship",
+  "stages": [
+    {
+      "id": "generator",
+      "title": "Maszynownia bez prądu",
+      "narrative": "Schodzicie po metalowych schodach do ciasnej maszynowni. Wielki generator milczy, z pękniętej rury syczy para, a z uszkodzonego kabla co chwila strzelają iskry. Na ścianie widać skrzynkę z sześcioma bezpiecznikami i wielką wajchę główną. Wskaźnik ciśnienia drga w czerwonym polu.",
+      "scene": {
+        "backdrop": "generator_room",
+        "ambientColor": "#b45309",
+        "lighting": "flicker",
+        "objects": [
+          {
+            "id": "fusebox",
+            "label": "Skrzynka bezpieczników",
+            "icon": "switch",
+            "description": "Dwa rzędy po trzy bezpieczniki: górny A, B, C i dolny D, E, F. Kredą napisano coś o literze L.",
+            "interactive": true,
+            "x": 0.86,
+            "y": 0.36,
+            "clue": "Napis kredą: „Prąd do lampy płynie przez bezpieczniki tworzące literę L: ten w prawym dolnym rogu, ten bezpośrednio nad nim i ten bezpośrednio na lewo od niego.”"
+          },
+          {
+            "id": "lever",
+            "label": "Wajcha główna",
+            "icon": "lever",
+            "description": "Ciężka, zardzewiała. Zadziała dopiero, gdy właściwe bezpieczniki będą włączone – inaczej wysadzi generator.",
+            "interactive": true,
+            "clue": ""
+          },
+          {
+            "id": "gauge",
+            "label": "Wskaźnik ciśnienia",
+            "icon": "compass",
+            "description": "Wskazówka drga w czerwonym polu. Gdy generator ruszy, powinna przejść na zielone.",
+            "interactive": true,
+            "clue": "Pod szybką wskaźnika wygrawerowano: „Generator znosi dokładnie TRZY włączone bezpieczniki. Każdy kolejny go wysadza.”"
+          },
+          {
+            "id": "cable",
+            "label": "Iskrzący kabel",
+            "icon": "cable",
+            "description": "Przepalona izolacja. Iskry przestaną, kiedy prąd popłynie właściwą drogą.",
+            "interactive": true,
+            "clue": "Kabel biegnie od skrzynki bezpieczników do generatora – to skrzynka decyduje, czy prąd popłynie."
+          }
+        ],
+        "props": [
+          {
+            "type": "sparks",
+            "x": 0.16,
+            "y": 0.62,
+            "size": 0.22,
+            "objectId": "cable",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "steam",
+            "x": 0.36,
+            "y": 0.5,
+            "size": 0.14,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "gauge",
+            "x": 0.62,
+            "y": 0.42,
+            "size": 0.16,
+            "objectId": "gauge",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "lever",
+            "x": 0.86,
+            "y": 0.62,
+            "size": 0.16,
+            "objectId": "lever",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          }
+        ],
+        "imagePrompt": "Cramped engine room at the base of an old stone lighthouse during a storm: a large silent brass-and-iron generator in the centre, cracked steam pipe on the left wall, a fuse box and a big main lever on the right wall, wet stone floor, a single swinging oil lamp, rain visible through a small round window.",
+        "imageAsset": "assets/images/builtin_latarnia/generator.png"
+      },
+      "puzzle": {
+        "type": "toggle_grid",
+        "prompt": "Ustawcie bezpieczniki (górny rząd A, B, C; dolny D, E, F) tak, aby prąd popłynął do lampy, a generator przeżył. Wskazówki zostawiono w maszynowni.",
+        "rows": 2,
+        "cols": 3,
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "targetState": [
+          false,
+          false,
+          true,
+          false,
+          true,
+          true
+        ]
+      },
+      "hints": [
+        "Narysujcie skrzynkę: dwa rzędy po trzy pola. Gdzie jest prawy dolny róg?",
+        "Litera L to trzy pola: róg, jedno w górę od rogu i jedno w bok od rogu.",
+        "Prawy dolny to F, nad nim C, na lewo od F jest E. Resztę zostawcie wyłączoną."
+      ],
+      "fallbackTexts": {
+        "success": "Trzask! Generator kaszle, potem równo mruczy. Iskry gasną, wskaźnik ciśnienia przechodzi na zielone, a nad Wami zapalają się lampy.",
+        "failure": "Bzzzt! Bezpiecznik wyskakuje z hukiem i wszystko gaśnie na sekundę. Ten układ nie tworzy właściwej litery L.",
+        "stuck": "Wyobraźcie sobie skrzynkę jak tabelkę z dwoma rzędami. Zacznijcie od rogu."
+      },
+      "effectOnSuccess": "lights_on"
+    },
+    {
+      "id": "radio",
+      "title": "Radiostacja",
+      "narrative": "Wchodzicie do drewnianej izby w połowie wieży. Trzy okrągłe okna zalewa deszcz, a błyskawice co chwila rozświetlają wnętrze. Na biurku stoi stara radiostacja z trzema pokrętłami, obok zielenią świeci ekran radaru. Na ścianie wisi tabliczka: „Na szczyt: 88 stopni.” Dziennik latarnika leży otwarty.",
+      "scene": {
+        "backdrop": "control_room",
+        "ambientColor": "#0e7490",
+        "lighting": "dark",
+        "objects": [
+          {
+            "id": "radio",
+            "label": "Radiostacja",
+            "icon": "radio",
+            "description": "Trzy pokrętła: KANAŁ, CZĘSTOTLIWOŚĆ i GŁOŚNOŚĆ. Wszystko ustawione byle jak.",
+            "interactive": true,
+            "clue": "Na obudowie wydrapano: „W izbie: 3 okrągłe okna, 2 lampy pod sufitem – policzone w nudny wieczór.”",
+            "requires": "log",
+            "lockedText": "Rzędy pokręteł i jakieś rysy na obudowie. Bez zapisków latarnika nie wiadomo, czego tu szukać."
+          },
+          {
+            "id": "log",
+            "label": "Dziennik latarnika",
+            "icon": "book",
+            "description": "Zapiski o tym, jak wezwać ratowników: kanał to liczba okien, częstotliwość to stopnie podzielone przez dwa, głośność to lampy razy trzy.",
+            "interactive": true,
+            "x": 0.8,
+            "y": 0.6,
+            "clue": "„KANAŁ ustaw na liczbę okien w tej izbie. CZĘSTOTLIWOŚĆ to liczba stopni na szczyt wieży podzielona przez dwa. GŁOŚNOŚĆ to liczba lamp pod sufitem pomnożona przez trzy.”"
+          },
+          {
+            "id": "plaque",
+            "label": "Tabliczka",
+            "icon": "note",
+            "description": "Mosiężna tabliczka: „Na szczyt: 88 stopni.”",
+            "interactive": true,
+            "x": 0.62,
+            "y": 0.3,
+            "clue": "„Na szczyt: 88 stopni.”"
+          },
+          {
+            "id": "radar",
+            "label": "Radar",
+            "icon": "screen",
+            "description": "Zielona wiązka omiata ekran. Jedna kropka miga blisko rafy – to ten statek.",
+            "interactive": true,
+            "clue": ""
+          }
+        ],
+        "props": [
+          {
+            "type": "window",
+            "x": 0.14,
+            "y": 0.34,
+            "size": 0.16,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "window",
+            "x": 0.5,
+            "y": 0.3,
+            "size": 0.16,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "window",
+            "x": 0.86,
+            "y": 0.34,
+            "size": 0.16,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "radar",
+            "x": 0.8,
+            "y": 0.74,
+            "size": 0.2,
+            "objectId": "radar",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "screen",
+            "x": 0.24,
+            "y": 0.74,
+            "size": 0.2,
+            "objectId": "radio",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "lamp",
+            "x": 0.5,
+            "y": 0.66,
+            "size": 0.1,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          }
+        ],
+        "imagePrompt": "Cozy wooden radio room inside an old lighthouse tower at night: a vintage brass radio transmitter with three large knobs on a desk, a small round radar screen glowing green, three round porthole windows streaked with rain, two ceiling oil lamps, an open logbook, warm lamplight against the stormy blue outside.",
+        "imageAsset": "assets/images/builtin_latarnia/radio.png"
+      },
+      "puzzle": {
+        "type": "dial_combination",
+        "prompt": "Wezwijcie pomoc: ustawcie KANAŁ, CZĘSTOTLIWOŚĆ i GŁOŚNOŚĆ radiostacji tak, jak zapisał latarnik.",
+        "dials": [
+          {
+            "label": "KANAŁ",
+            "min": 1,
+            "max": 9
+          },
+          {
+            "label": "CZĘSTOTLIWOŚĆ",
+            "min": 10,
+            "max": 99
+          },
+          {
+            "label": "GŁOŚNOŚĆ",
+            "min": 0,
+            "max": 10
+          }
+        ],
+        "answer": [
+          3,
+          44,
+          6
+        ]
+      },
+      "hints": [
+        "Każde pokrętło ma swoją wskazówkę w dzienniku – czytajcie po jednym.",
+        "Policzcie okna i lampy w opisie izby, a liczbę stopni znajdziecie na tabliczce.",
+        "3 okna → kanał 3; 88 : 2 = 44; 2 lampy × 3 = 6."
+      ],
+      "fallbackTexts": {
+        "success": "Trzask statyczny cichnie i słyszycie głos: „Stacja ratownicza, odbiór! Widzimy Was, płyniemy!” Kropka na radarze zaczyna się oddalać od rafy.",
+        "failure": "Z głośnika sypie się tylko szum i trzaski. To nie ta częstotliwość albo nie ten kanał.",
+        "stuck": "Trzy liczby, trzy wskazówki. Które dane macie podane wprost?"
+      },
+      "effectOnSuccess": "sparkle"
+    },
+    {
+      "id": "lamp",
+      "title": "Izba lampy",
+      "narrative": "Po 88 stopniach docieracie na szczyt: szklana izba, a w niej ogromna soczewka na obrotowym mechanizmie z kołami zębatymi. Zbiornik oleju z czerwonym zaworem, zimny palnik, okiennice trzaskają na wietrze, przesłona opuszczona. Na podłodze leży podarta instrukcja rozruchu.",
+      "scene": {
+        "backdrop": "observatory",
+        "ambientColor": "#f59e0b",
+        "lighting": "dark",
+        "objects": [
+          {
+            "id": "lens",
+            "label": "Wielka soczewka",
+            "icon": "crystal",
+            "description": "Szklane pryzmaty wysokie jak Wy. Nic nie da, dopóki nie zapłonie palnik i nie ruszy obrót.",
+            "interactive": true,
+            "clue": ""
+          },
+          {
+            "id": "valve",
+            "label": "Zawór oleju",
+            "icon": "gear",
+            "description": "Czerwone koło zaworu na zbiorniku. Pompa oleju to zawsze pierwszy krok rozruchu.",
+            "interactive": true,
+            "clue": "Na kole zaworu wyryto: „Pompa oleju – zawsze pierwszy krok.”"
+          },
+          {
+            "id": "burner",
+            "label": "Palnik",
+            "icon": "candle",
+            "description": "Zimny i ciemny. Instrukcja ostrzega: nie zapalać przy otwartych okiennicach.",
+            "interactive": true,
+            "clue": "Tabliczka na palniku: „Nie zapalać przy otwartych okiennicach!”"
+          },
+          {
+            "id": "manual",
+            "label": "Podarta instrukcja",
+            "icon": "scroll",
+            "description": "Pięć kroków rozruchu w pięciu strzępach papieru, a obok wskazówki, co po czym.",
+            "interactive": true,
+            "clue": "„Pompa oleju jest zawsze pierwszym krokiem. Palnika nie wolno zapalać przy otwartych okiennicach. Palnik potrzebuje oleju. Mechanizm obrotu włącza się dopiero, gdy palnik płonie. Przesłonę otwiera się na samym końcu.”"
+          }
+        ],
+        "props": [
+          {
+            "type": "custom",
+            "x": 0.5,
+            "y": 0.42,
+            "size": 0.3,
+            "objectId": "lens",
+            "label": "Soczewka",
+            "reactsToSuccess": true,
+            "spritePrompt": "A giant antique lighthouse Fresnel lens: a tall barrel of concentric faceted glass prisms in a brass frame on a brass pedestal, glass tinted pale teal, warm brass highlights.",
+            "spriteAsset": "assets/images/builtin_latarnia/lamp_prop0.png",
+            "animation": "pulse"
+          },
+          {
+            "type": "gear",
+            "x": 0.26,
+            "y": 0.74,
+            "size": 0.2,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "valve",
+            "x": 0.14,
+            "y": 0.66,
+            "size": 0.16,
+            "objectId": "valve",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "candle",
+            "x": 0.7,
+            "y": 0.56,
+            "size": 0.09,
+            "objectId": "burner",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "window",
+            "x": 0.86,
+            "y": 0.4,
+            "size": 0.18,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "scroll",
+            "x": 0.86,
+            "y": 0.8,
+            "size": 0.12,
+            "objectId": "manual",
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spritePath": null,
+            "spriteAsset": null,
+            "animation": "none"
+          }
+        ],
+        "imagePrompt": "Top of an old lighthouse at night: a glass lantern room with a giant faceted Fresnel lens on a brass rotating mechanism with visible gears, an oil tank with a red valve, a cold burner, wooden shutters, rain and lightning outside the glass, moody blue darkness with a hint of warm brass.",
+        "imageAsset": "assets/images/builtin_latarnia/lamp.png"
+      },
+      "puzzle": {
+        "type": "sequence_order",
+        "prompt": "Ułóżcie kroki rozruchu lampy w dobrej kolejności – instrukcja latarnika jest gdzieś w izbie.",
+        "items": [
+          "Zapal palnik",
+          "Zamknij okiennice",
+          "Otwórz przesłonę",
+          "Włącz pompę oleju",
+          "Uruchom mechanizm obrotu"
+        ],
+        "correctOrder": [
+          "Włącz pompę oleju",
+          "Zamknij okiennice",
+          "Zapal palnik",
+          "Uruchom mechanizm obrotu",
+          "Otwórz przesłonę"
+        ]
+      },
+      "hints": [
+        "Zacznijcie od kroku, który „zawsze jest pierwszy”, i tego, który jest „na samym końcu”.",
+        "Zostały trzy kroki: okiennice, palnik i obrót. Co musi być przed palnikiem, a co po nim?",
+        "Pompa, okiennice, palnik, obrót, przesłona."
+      ],
+      "fallbackTexts": {
+        "success": "Olej syczy, palnik buchа ciepłym płomieniem, koła zębate ruszają z jękiem i soczewka zaczyna się obracać. Przesłona unosi się – snop światła wystrzeliwuje w noc.",
+        "failure": "Mechanizm zgrzyta i staje. Coś zrobiliście w złej kolejności – instrukcja ma powód dla każdego kroku.",
+        "stuck": "Które dwa kroki mają jasno określone miejsce: pierwsze i ostatnie?"
+      },
+      "effectOnSuccess": "gears_turn"
+    },
+    {
+      "id": "exit",
+      "title": "Zamek na drzwiach",
+      "narrative": "Zbiegacie na dół. Światło latarni już omiata morze, ale ciężkie drzwi wyjściowe wciąż trzyma elektroniczny zamek na trzy cyfry. Obok wisi kartka z nieudanymi próbami poprzednich latarników i komentarzami mechanizmu.",
+      "scene": {
+        "backdrop": "airlock",
+        "ambientColor": "#2dd4bf",
+        "lighting": "bright",
+        "objects": [
+          {
+            "id": "lock",
+            "label": "Zamek z klawiaturą",
+            "icon": "lock",
+            "description": "Trzy cyfry. Po każdej błędnej próbie mechanizm mruczy komentarz – ktoś je spisał na kartce.",
+            "interactive": true,
+            "clue": "Trzy cyfry. Po każdej błędnej próbie zamek mruczy komentarz – ktoś spisał je wszystkie na kartce obok."
+          },
+          {
+            "id": "note",
+            "label": "Kartka z próbami",
+            "icon": "note",
+            "description": "Cztery nieudane kody z komentarzami zamka. Jedna z prób zdradza wszystkie trzy cyfry naraz.",
+            "interactive": true,
+            "x": 0.86,
+            "y": 0.36,
+            "clue": "Cztery nieudane kody z komentarzami zamka – przepisane na klawiaturę pod zamkiem."
+          },
+          {
+            "id": "door",
+            "label": "Drzwi wyjściowe",
+            "icon": "door",
+            "description": "Dębowe, okute żelazem. Za nimi słabnący sztorm i wolność.",
+            "interactive": true
+          }
+        ],
+        "props": [
+          {
+            "type": "door",
+            "x": 0.5,
+            "y": 0.6,
+            "size": 0.26,
+            "objectId": "door",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "pinpad",
+            "x": 0.8,
+            "y": 0.62,
+            "size": 0.13,
+            "objectId": "lock",
+            "label": null,
+            "reactsToSuccess": true,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "lamp",
+            "x": 0.18,
+            "y": 0.4,
+            "size": 0.1,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          },
+          {
+            "type": "window",
+            "x": 0.16,
+            "y": 0.72,
+            "size": 0.14,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false,
+            "spritePrompt": null,
+            "spriteAsset": null,
+            "animation": "bob"
+          }
+        ],
+        "imagePrompt": "Ground floor entrance hall of an old lighthouse: a massive iron-banded wooden door with a modern keypad lock mounted on the stone wall beside it, wet flagstones, a coiled rope and a brass lantern, warm light from above and stormy night visible through a small window.",
+        "imageAsset": "assets/images/builtin_latarnia/exit.png"
+      },
+      "puzzle": {
+        "type": "pin_code",
+        "prompt": "Wpiszcie trzycyfrowy kod zamka. Kartka z nieudanymi próbami wisi obok.",
+        "codeLength": 3,
+        "answer": "593",
+        "clues": [
+          {
+            "code": "512",
+            "inPlace": 1,
+            "wrongPlace": 0,
+            "text": "Jedna cyfra poprawna i na właściwym miejscu."
+          },
+          {
+            "code": "930",
+            "inPlace": 0,
+            "wrongPlace": 2,
+            "text": "Dwie cyfry poprawne, obie na niewłaściwych miejscach."
+          },
+          {
+            "code": "468",
+            "inPlace": 0,
+            "wrongPlace": 0,
+            "text": "Żadna cyfra nie jest poprawna."
+          },
+          {
+            "code": "359",
+            "inPlace": 0,
+            "wrongPlace": 3,
+            "text": "Trzy cyfry poprawne, wszystkie na niewłaściwych miejscach."
+          }
+        ]
+      },
+      "hints": [
+        "Która próba mówi Wam, jakie trzy cyfry są w kodzie?",
+        "Skoro w 512 tylko piątka może być poprawna, to gdzie ona stoi?",
+        "Dziewiątka nie może być trzecia (próba 359), więc jest druga. Zostaje 5 9 3."
+      ],
+      "fallbackTexts": {
+        "success": "Klik-klak! Rygle odsuwają się jeden po drugim, a ciężkie drzwi rozsuwają się na oścież. Wpada zimne, słone powietrze.",
+        "failure": "Zamek mruczy coś niezadowolonym tonem i miga na czerwono. Porównajcie jeszcze raz próby z kartki.",
+        "stuck": "Jedna z prób ma trzy poprawne cyfry – zaczyna się od niej."
+      },
+      "effectOnSuccess": "door_slide"
+    }
+  ],
+  "createdAt": "2026-09-06T13:00:00.000",
+  "designedBy": "builtin"
+}

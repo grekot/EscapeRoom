@@ -1,0 +1,583 @@
+{
+  "format": "escape-room-game/1",
+  "id": "builtin_warsztat_wynalazcy",
+  "scenarioId": "builtin_warsztat_wynalazcy",
+  "title": "Warsztat Wynalazcy",
+  "intro": "Z cichym sykiem pneumatycznych siłowników ciężkie, stalowe drzwi zamykają się za Waszymi plecami. Mechaniczny zamek klika głucho – jesteście uwięzieni w opuszczonym laboratorium genialnego wynalazcy. W mroku miga tylko czerwona dioda na głównym panelu sterowania. Aby wyjść, musicie przywrócić zasilanie, otworzyć sejf, naprawić czytnik kart i odblokować śluzę.",
+  "outro": "Klink! Fałszywe koło ląduje na boku, a mosiężny element wsuwa się w gniazdo blokady. Rozlega się zgrzyt zwalnianych rygli, z sufitu sypie się kurz, a masywne wrota otwierają się na oścież, wpuszczając blask słońca. Jesteście wolni! Złamanie logów sejfu, przechytrzenie kłamliwych etykiet i perfekcyjny plan ważenia to wynik godny prawdziwych inżynierów.",
+  "difficulty": "medium",
+  "targetAge": 11,
+  "visualTheme": "laboratory",
+  "stages": [
+    {
+      "id": "power",
+      "title": "Przebudzenie warsztatu",
+      "narrative": "W ciemności wyczuwacie wielki stół roboczy zawalony niedokończonymi projektami. Jedyne światło to czerwona dioda na panelu sterowania. Obok otwartej skrzynki z elektroniką zwisają cztery luźne przewody, a na obudowie ktoś przykleił pożółkłą kartkę.",
+      "scene": {
+        "backdrop": "workshop",
+        "ambientColor": "#7f1d1d",
+        "lighting": "dark",
+        "objects": [
+          {
+            "id": "panel",
+            "label": "Panel sterowania",
+            "icon": "switch",
+            "description": "Skrzynka z czterema wolnymi pinami. Przewody trzeba wpinać pojedynczo, w dobrej kolejności. Pomyłka grozi przepięciem.",
+            "interactive": true,
+            "x": 0.14,
+            "y": 0.34,
+            "clue": "Cztery wolne piny – przewody wpina się pojedynczo, w kolejności."
+          },
+          {
+            "id": "note",
+            "label": "Pożółkła kartka",
+            "icon": "note",
+            "description": "Ręczne pismo konstruktora: „Czarny nigdy pierwszy ani ostatni. Biały natychmiast po czerwonym. Zielony przed czarnym.”",
+            "interactive": true,
+            "x": 0.27,
+            "y": 0.33,
+            "clue": "„Czarny nigdy pierwszy ani ostatni. Biały natychmiast po czerwonym. Zielony przed czarnym.”"
+          },
+          {
+            "id": "table",
+            "label": "Stół roboczy",
+            "icon": "table",
+            "description": "Śrubokręty, lutownica, resztki filamentu. Nic, co pomogłoby z przewodami – ale widać, że konstruktor lubił porządek w kolejności działań.",
+            "interactive": true,
+            "x": 0.52,
+            "y": 0.62
+          },
+          {
+            "id": "lamp",
+            "label": "Zgaszona jarzeniówka",
+            "icon": "lamp",
+            "description": "Bez zasilania nie zaświeci. Wszystko zależy od panelu.",
+            "interactive": true
+          }
+        ],
+        "props": [
+          {
+            "type": "sparks",
+            "x": 0.18,
+            "y": 0.62,
+            "size": 0.22,
+            "objectId": "panel",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "switch",
+            "x": 0.84,
+            "y": 0.56,
+            "size": 0.14,
+            "objectId": "panel",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "lamp",
+            "x": 0.5,
+            "y": 0.22,
+            "size": 0.1,
+            "objectId": "lamp",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "steam",
+            "x": 0.34,
+            "y": 0.52,
+            "size": 0.12,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false
+          }
+        ],
+        "imagePrompt": "Dark cluttered inventor's workshop lit only by a blinking red diode: a long workbench covered with half-built gadgets, screwdrivers and spools of coloured filament, an open electrical control cabinet on the wall with four loose coloured wires hanging out, a yellowed paper note taped beside it, tall dark shelves, a big unlit fluorescent lamp overhead.",
+        "imageAsset": "assets/images/builtin_warsztat_wynalazcy/power.png"
+      },
+      "puzzle": {
+        "type": "sequence_order",
+        "prompt": "Ułóżcie przewody w kolejności wpinania (od pierwszego do czwartego). Pamiętajcie o zasadach z kartki: czarny nigdy pierwszy ani ostatni; biały natychmiast po czerwonym; zielony przed czarnym.",
+        "items": [
+          "Czerwony",
+          "Biały",
+          "Zielony",
+          "Czarny"
+        ],
+        "correctOrder": [
+          "Zielony",
+          "Czarny",
+          "Czerwony",
+          "Biały"
+        ]
+      },
+      "hints": [
+        "Zacznijcie od przewodu, który ma najwięcej ograniczeń – czarnego. Gdzie na pewno nie może być?",
+        "Czerwony i biały zawsze idą razem, biały zaraz po czerwonym. Ile miejsc zostaje dla zielonego i czarnego?",
+        "Zielony musi być przed czarnym, a czarny nie może być pierwszy – więc zielony jest pierwszy, a czarny drugi."
+      ],
+      "fallbackTexts": {
+        "success": "Bzzzt! Wpinacie ostatni przewód i warsztat ożywa. Transformatory buczą, jarzeniówki mrugają i zalewają pomieszczenie światłem.",
+        "failure": "Trzask! Iskra przeskakuje między pinami, a system awaryjnie odcina prąd. Przewody wracają na miejsce – spróbujcie innej kolejności.",
+        "stuck": "Przeczytajcie kartkę jeszcze raz, zasada po zasadzie. Każda z nich wyklucza jakieś miejsca."
+      },
+      "effectOnSuccess": "lights_on"
+    },
+    {
+      "id": "safe",
+      "title": "Sejf z logami",
+      "narrative": "Światło ujawnia pracownię majsterkowicza: mikrokontrolery, lutownice, zwoje filamentu i prototyp drukarki 3D. Waszą uwagę przykuwa masywny stalowy sejf wmurowany w ścianę. Na jego drzwiczkach wisi pognieciona kartka z pięcioma nieudanymi próbami włamania.",
+      "scene": {
+        "backdrop": "workshop",
+        "ambientColor": "#1e3a8a",
+        "lighting": "bright",
+        "objects": [
+          {
+            "id": "safe",
+            "label": "Stalowy sejf",
+            "icon": "safe",
+            "description": "Elektroniczny zamek z klawiaturą numeryczną. Po trzech cyfrach zamek sam sprawdza kod.",
+            "interactive": true
+          },
+          {
+            "id": "logs",
+            "label": "Kartka z logami",
+            "icon": "note",
+            "description": "Pięć błędnych kodów i komentarz systemu do każdego. Ktoś próbował po omacku – ale zostawił Wam wszystko, czego trzeba.",
+            "interactive": true,
+            "x": 0.86,
+            "y": 0.42,
+            "clue": "Pięć błędnych kodów z komentarzem systemu do każdego – lista widnieje przy klawiaturze sejfu."
+          },
+          {
+            "id": "printer",
+            "label": "Prototyp drukarki 3D",
+            "icon": "gear",
+            "description": "Ogromna maszyna z ręcznie nawijaną cewką. Na obudowie napis: „Wersja 0.4.2 – działa!”",
+            "interactive": true
+          },
+          {
+            "id": "board",
+            "label": "Mikrokontrolery",
+            "icon": "computer",
+            "description": "Płytki z mrugającymi diodami. Nic o kodzie, ale konstruktor najwyraźniej lubił trzycyfrowe numery wersji.",
+            "interactive": true,
+            "clue": "Konstruktor lubił trzycyfrowe numery wersji."
+          }
+        ],
+        "props": [
+          {
+            "type": "pinpad",
+            "x": 0.82,
+            "y": 0.58,
+            "size": 0.13,
+            "objectId": "safe",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "screen",
+            "x": 0.18,
+            "y": 0.7,
+            "size": 0.2,
+            "objectId": "board",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "gear",
+            "x": 0.5,
+            "y": 0.76,
+            "size": 0.2,
+            "objectId": "printer",
+            "label": null,
+            "reactsToSuccess": false
+          }
+        ],
+        "imagePrompt": "Bright inventor's workshop: workbenches with microcontroller boards, soldering irons and coloured filament spools, a bulky early prototype 3D printer with hand-wound coils in a corner, and a massive steel safe with an electronic keypad set into the brick wall at the back, a crumpled paper note taped to its door.",
+        "imageAsset": "assets/images/builtin_warsztat_wynalazcy/safe.png"
+      },
+      "puzzle": {
+        "type": "pin_code",
+        "prompt": "Wpiszcie trzycyfrowy kod PIN. Analiza błędnych prób z kartki wisi obok klawiatury.",
+        "codeLength": 3,
+        "answer": "042",
+        "clues": [
+          {
+            "code": "682",
+            "inPlace": 1,
+            "wrongPlace": 0,
+            "text": "Jedna cyfra jest poprawna i znajduje się na właściwym miejscu."
+          },
+          {
+            "code": "614",
+            "inPlace": 0,
+            "wrongPlace": 1,
+            "text": "Jedna cyfra jest poprawna, ale na niewłaściwym miejscu."
+          },
+          {
+            "code": "206",
+            "inPlace": 0,
+            "wrongPlace": 2,
+            "text": "Dwie cyfry są poprawne, obie na niewłaściwych miejscach."
+          },
+          {
+            "code": "738",
+            "inPlace": 0,
+            "wrongPlace": 0,
+            "text": "Wszystkie trzy cyfry są całkowicie błędne."
+          },
+          {
+            "code": "380",
+            "inPlace": 0,
+            "wrongPlace": 1,
+            "text": "Jedna cyfra jest poprawna, ale na niewłaściwym miejscu."
+          }
+        ]
+      },
+      "hints": [
+        "Zacznijcie od próby, w której wszystkie cyfry są błędne – te cyfry możecie skreślić wszędzie.",
+        "Porównajcie 682 i 206: która cyfra występuje w obu i co to mówi o jej miejscu?",
+        "Skoro 2 stoi na trzecim miejscu, a 0 nie może być na drugim, to 0 jest pierwsze. Środkową cyfrę znajdziecie w próbie 614."
+      ],
+      "fallbackTexts": {
+        "success": "Piiiiip! Klawiatura wydaje radosny dźwięk, a ciężkie drzwiczki odskakują z sykiem. W środku leży magnetyczna karta dostępu.",
+        "failure": "Klawiatura mruga na czerwono i cofa wpis. Zamek nie zauważył próby – możecie spróbować ponownie.",
+        "stuck": "Każdy log to fakt. Zapiszcie, które cyfry są na pewno błędne, a które muszą być w kodzie."
+      },
+      "effectOnSuccess": "safe_open"
+    },
+    {
+      "id": "boxes",
+      "title": "Trzy pudełka",
+      "narrative": "Karta z sejfu to Wasz bilet do wyjścia, ale czytnik przy drzwiach jest martwy – brakuje w nim zielonej diody. Na stole stoją trzy nieprzezroczyste pudełka z etykietami, a obok leży wymięta kartka z dziennika konstruktora: „Mój asystent upuścił pudełka i nakleił etykiety z powrotem tak fatalnie, że KAŻDE ma teraz błędną etykietę.”",
+      "scene": {
+        "backdrop": "workshop",
+        "ambientColor": "#166534",
+        "lighting": "bright",
+        "objects": [
+          {
+            "id": "box1",
+            "label": "Pudełko „Tylko Czerwone”",
+            "icon": "box",
+            "description": "Ciężkie, zaklejone taśmą. Etykieta na pewno kłamie – w środku nie ma samych czerwonych.",
+            "interactive": true,
+            "clue": "Etykieta „Tylko Czerwone” kłamie: w środku NIE ma samych czerwonych."
+          },
+          {
+            "id": "box2",
+            "label": "Pudełko „Tylko Zielone”",
+            "icon": "box",
+            "description": "Podobne do pozostałych. W środku na pewno nie ma samych zielonych.",
+            "interactive": true,
+            "clue": "Etykieta „Tylko Zielone” kłamie: w środku NIE ma samych zielonych."
+          },
+          {
+            "id": "box3",
+            "label": "Pudełko „Mieszane”",
+            "icon": "box",
+            "description": "Etykieta kłamie, więc w tym pudełku nie ma mieszanki. Czyli jest tam tylko jeden kolor…",
+            "interactive": true,
+            "clue": "Etykieta „Mieszane” kłamie: w tym pudełku jest tylko JEDEN kolor."
+          },
+          {
+            "id": "reader",
+            "label": "Czytnik kart",
+            "icon": "lock",
+            "description": "Puste gniazdo na diodę sygnalizacyjną. Potrzebna zielona – czerwona zablokuje obwód na dobre.",
+            "interactive": true,
+            "x": 0.5,
+            "y": 0.3
+          },
+          {
+            "id": "sensor",
+            "label": "Czujnik ruchu",
+            "icon": "camera",
+            "description": "Czerwone oko śledzi każdy Wasz ruch. Macie prawo do jednego sięgnięcia do jednego pudełka.",
+            "interactive": true
+          }
+        ],
+        "props": [
+          {
+            "type": "chest",
+            "x": 0.2,
+            "y": 0.7,
+            "size": 0.18,
+            "objectId": "box1",
+            "label": null,
+            "reactsToSuccess": false
+          },
+          {
+            "type": "chest",
+            "x": 0.5,
+            "y": 0.72,
+            "size": 0.18,
+            "objectId": "box2",
+            "label": null,
+            "reactsToSuccess": false
+          },
+          {
+            "type": "chest",
+            "x": 0.8,
+            "y": 0.7,
+            "size": 0.18,
+            "objectId": "box3",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "lamp",
+            "x": 0.5,
+            "y": 0.28,
+            "size": 0.08,
+            "objectId": "sensor",
+            "label": null,
+            "reactsToSuccess": false
+          }
+        ],
+        "imagePrompt": "Workbench in an inventor's workshop with three identical closed cardboard boxes in a row, each with a taped paper label, a crumpled diary page beside them, a card reader with an empty LED socket mounted by a heavy steel door in the background, a small red motion-sensor eye glowing on the wall.",
+        "imageAsset": "assets/images/builtin_warsztat_wynalazcy/boxes.png"
+      },
+      "puzzle": {
+        "type": "multiple_choice",
+        "prompt": "Możecie w ciemno wyciągnąć tylko jedną diodę z jednego pudełka. Z którego pudełka losujecie, aby to jedno losowanie dało 100% pewności, gdzie są wyłącznie zielone diody?",
+        "options": [
+          "Pudełko „Tylko Czerwone Diody”",
+          "Pudełko „Tylko Zielone Diody”",
+          "Pudełko „Mieszane: Czerwone i Zielone”"
+        ],
+        "correctIndex": 2
+      },
+      "hints": [
+        "Skoro każda etykieta kłamie, to co na pewno NIE jest w pudełku z napisem „Mieszane”?",
+        "W pudełku „Mieszane” są diody tylko jednego koloru. Jedno losowanie wystarczy, aby ten kolor poznać.",
+        "Losujcie z pudełka „Mieszane” – jego zawartość jest jednolita, więc jedna dioda mówi wszystko."
+      ],
+      "fallbackTexts": {
+        "success": "Sięgacie do pudełka „Mieszane” i wyciągacie… zieloną diodę! Skoro etykieta kłamie, w tym pudełku są same zielone.",
+        "failure": "Zatrzymujecie rękę w pół drogi. Z tego pudełka jedna dioda niczego nie przesądzi – mogłyby tam być zarówno jeden kolor, jak i mieszanka.",
+        "stuck": "Pomyślcie, które pudełko ma w środku na pewno tylko jeden kolor."
+      },
+      "effectOnSuccess": "sparkle"
+    },
+    {
+      "id": "labels",
+      "title": "Nowe etykiety",
+      "narrative": "Zielona dioda z pudełka „Mieszane” leży na blacie. Zanim zamontujecie ją w czytniku, konstruktor – głosem z głośnika – żąda porządku: „Nie wyjdziecie, dopóki etykiety nie będą prawdziwe!” Trzy odklejone karteczki czekają na właściwe pudełka.",
+      "scene": {
+        "backdrop": "workshop",
+        "ambientColor": "#166534",
+        "lighting": "bright",
+        "objects": [
+          {
+            "id": "led",
+            "label": "Zielona dioda",
+            "icon": "bulb",
+            "description": "Wylosowana z pudełka „Mieszane”. Dowód, że tam są same zielone.",
+            "interactive": true,
+            "x": 0.5,
+            "y": 0.32,
+            "clue": "Zielona dioda pochodzi z pudełka „Mieszane” – tam są same zielone."
+          },
+          {
+            "id": "labels",
+            "label": "Odklejone etykiety",
+            "icon": "note",
+            "description": "„Tylko Czerwone”, „Tylko Zielone”, „Mieszane”. Każda musi trafić tam, gdzie mówi prawdę.",
+            "interactive": true,
+            "x": 0.18,
+            "y": 0.7,
+            "clue": "Etykiety: „Tylko Czerwone”, „Tylko Zielone”, „Mieszane” – każda wisiała na złym pudełku."
+          },
+          {
+            "id": "speaker",
+            "label": "Głośnik",
+            "icon": "radio",
+            "description": "Trzeszczący głos konstruktora: „Pamiętajcie – stare etykiety kłamały WSZYSTKIE.”",
+            "interactive": true,
+            "x": 0.82,
+            "y": 0.62
+          }
+        ],
+        "props": [
+          {
+            "type": "lamp",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 0.09,
+            "objectId": "led",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "scroll",
+            "x": 0.18,
+            "y": 0.7,
+            "size": 0.18,
+            "objectId": "labels",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "radar",
+            "x": 0.82,
+            "y": 0.62,
+            "size": 0.16,
+            "objectId": "speaker",
+            "label": null,
+            "reactsToSuccess": false
+          }
+        ],
+        "imagePrompt": "Close view of a workshop bench: three cardboard boxes with their paper labels peeled off and lying loose on the wooden surface, a single tiny green LED on the bench, a vintage wall loudspeaker with a brass grille above, warm lamp light, tools in the background.",
+        "imageAsset": "assets/images/builtin_warsztat_wynalazcy/labels.png"
+      },
+      "puzzle": {
+        "type": "matching",
+        "prompt": "Wylosowaliście ZIELONĄ diodę z pudełka „Mieszane”. Wszystkie stare etykiety były błędne. Dopasujcie do każdego pudełka (według starej etykiety) jego prawdziwą zawartość.",
+        "leftItems": [
+          "Pudełko ze starą etykietą „Tylko Czerwone”",
+          "Pudełko ze starą etykietą „Tylko Zielone”",
+          "Pudełko ze starą etykietą „Mieszane”"
+        ],
+        "rightItems": [
+          "Tylko czerwone diody",
+          "Tylko zielone diody",
+          "Mieszane diody"
+        ],
+        "correctPairs": [
+          [
+            "Pudełko ze starą etykietą „Tylko Czerwone”",
+            "Mieszane diody"
+          ],
+          [
+            "Pudełko ze starą etykietą „Tylko Zielone”",
+            "Tylko czerwone diody"
+          ],
+          [
+            "Pudełko ze starą etykietą „Mieszane”",
+            "Tylko zielone diody"
+          ]
+        ]
+      },
+      "hints": [
+        "Pudełko, z którego losowaliście, jest już rozstrzygnięte. Zostały dwa pudełka i dwie zawartości.",
+        "Pudełko z napisem „Tylko Czerwone” nie może zawierać samych czerwonych – etykieta kłamie.",
+        "Skoro „Tylko Czerwone” ma mieszane, to „Tylko Zielone” musi mieć czerwone."
+      ],
+      "fallbackTexts": {
+        "success": "Bip-bip! Montujecie zieloną diodę w czytniku, przykładacie kartę i drzwi odsuwają się z głośnym sykiem. Głośnik mruczy z uznaniem.",
+        "failure": "Głośnik trzeszczy: „Nie, nie, nie! Któraś etykieta nadal kłamie.” Karteczki odklejają się same.",
+        "stuck": "Zacznijcie od pudełka, którego zawartość już znacie. Reszta to eliminacja."
+      },
+      "effectOnSuccess": "door_slide"
+    },
+    {
+      "id": "scale",
+      "title": "Śluza i waga",
+      "narrative": "Wpadacie do wąskiej stalowej śluzy – ostatniego pomieszczenia przed wolnością. Ryglowane drzwi są zablokowane. Na stoliku stoi stara mosiężna waga szalkowa i dziewięć identycznych kół zębatych. Na ścianie wyryto: „Jedno koło to fałszywka z ołowiem – minimalnie cięższe. Waga rozsypie się po dokładnie dwóch ważeniach.”",
+      "scene": {
+        "backdrop": "airlock",
+        "ambientColor": "#92400e",
+        "lighting": "flicker",
+        "objects": [
+          {
+            "id": "scale",
+            "label": "Waga szalkowa",
+            "icon": "scale",
+            "description": "Dwie szale, trzy możliwe wyniki: lewa cięższa, prawa cięższa albo równowaga. Zardzewiały mechanizm wytrzyma dokładnie dwa ważenia.",
+            "interactive": true,
+            "x": 0.86,
+            "y": 0.34
+          },
+          {
+            "id": "gears",
+            "label": "Dziewięć kół zębatych",
+            "icon": "gear",
+            "description": "Wyglądają identycznie. Osiem waży tyle samo, jedno jest odrobinę cięższe.",
+            "interactive": true,
+            "x": 0.8,
+            "y": 0.74,
+            "clue": "Dziewięć kół, jedno odrobinę cięższe; waga wytrzyma tylko dwa ważenia."
+          },
+          {
+            "id": "door",
+            "label": "Ryglowane wrota",
+            "icon": "door",
+            "description": "Masywne, z gniazdem na jedno koło zębate. Fałszywka blokuje mechanizm.",
+            "interactive": true
+          },
+          {
+            "id": "inscription",
+            "label": "Wyryty napis",
+            "icon": "scroll",
+            "description": "„Trzy wyniki wagi to więcej niż dwa. Kto to zrozumie, wyjdzie.”",
+            "interactive": true,
+            "x": 0.2,
+            "y": 0.3,
+            "clue": "„Trzy wyniki wagi to więcej niż dwa.”"
+          }
+        ],
+        "props": [
+          {
+            "type": "door",
+            "x": 0.5,
+            "y": 0.52,
+            "size": 0.24,
+            "objectId": "door",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "gear",
+            "x": 0.8,
+            "y": 0.74,
+            "size": 0.2,
+            "objectId": "gears",
+            "label": null,
+            "reactsToSuccess": true
+          },
+          {
+            "type": "candle",
+            "x": 0.14,
+            "y": 0.5,
+            "size": 0.09,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false
+          },
+          {
+            "type": "pendulum",
+            "x": 0.86,
+            "y": 0.34,
+            "size": 0.1,
+            "objectId": null,
+            "label": null,
+            "reactsToSuccess": false
+          }
+        ],
+        "imagePrompt": "Narrow steel airlock corridor with riveted walls and a massive bolted iron door at the end, a small table holding an old brass balance scale and nine identical brass gears, an inscription carved into the wall, cold flickering light with a hint of afternoon sun leaking around the door.",
+        "imageAsset": "assets/images/builtin_warsztat_wynalazcy/scale.png"
+      },
+      "puzzle": {
+        "type": "open_explanation",
+        "prompt": "Macie 9 kół zębatych i tylko 2 ważenia. Opiszcie, jak rozdzielicie koła i jak przeprowadzicie ważenia, aby ze stuprocentową pewnością wskazać jedno cięższe koło.",
+        "rubric": "Odpowiedź musi: (1) podzielić 9 kół na trzy grupy po 3; (2) w pierwszym ważeniu porównać dwie grupy i z wyniku (przeważa jedna / równowaga → trzecia grupa) wskazać grupę z fałszywką; (3) w drugim ważeniu porównać dwa koła z tej grupy i z wyniku (przeważa jedno / równowaga → trzecie koło) wskazać fałszywkę. Odpowiedzi dzielące na dwie połowy albo wymagające trzeciego ważenia są błędne. Akceptuj różne sformułowania i literówki, jeśli logika jest kompletna.",
+        "exampleSolution": "Dzielimy na 3 grupy po 3. Ważymy dwie grupy: jeśli jedna przeważa, fałszywka jest w niej; jeśli równowaga – w trzeciej. Z wybranej grupy ważymy dwa koła: jeśli jedno przeważa, to ono; jeśli równowaga – fałszywe jest trzecie, nieważone."
+      },
+      "hints": [
+        "Waga daje trzy odpowiedzi: lewa cięższa, prawa cięższa, równowaga. Jak podzielić koła, żeby każdy wynik coś mówił?",
+        "Podzielcie koła na trzy równe grupy. Co daje zważenie dwu z nich, a odłożenie trzeciej?",
+        "Po pierwszym ważeniu zostają trzy podejrzane koła. Zważcie dwa z nich – równowaga też jest odpowiedzią."
+      ],
+      "fallbackTexts": {
+        "success": "Klink! Odkładacie fałszywe koło, a właściwe wsuwa się w gniazdo. Rygle zgrzytają, kurz sypie się z sufitu i wrota otwierają się na oścież.",
+        "failure": "Waga chwieje się niepewnie. Ten plan nie daje pewności w dwóch ważeniach – wróćcie do rozdzielania kół.",
+        "stuck": "Dwie połowy to za mało informacji. Pomyślcie o liczbie trzy."
+      },
+      "effectOnSuccess": "gears_turn"
+    }
+  ],
+  "createdAt": "2026-09-06T12:00:00.000",
+  "designedBy": "builtin"
+}

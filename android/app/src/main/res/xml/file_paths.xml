@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- getTemporaryDirectory() in Flutter == cacheDir -->
+    <cache-path name="shared" path="shared/"/>
+    <!-- downloaded app updates (AppUpdater.downloadApk) -->
+    <cache-path name="updates" path="updates/"/>
+</paths>

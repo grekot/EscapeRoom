@@ -1,0 +1,4 @@
+# `live` tests call the real Gemini API and need GEMINI_API_KEY; CI runs
+# `flutter test --exclude-tags live`.
+tags:
+  live:
